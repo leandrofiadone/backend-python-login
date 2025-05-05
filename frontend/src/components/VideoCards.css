@@ -1,0 +1,13 @@
+.icon-container {
+ position: absolute;
+ bottom: 0;
+ right: 0;
+ margin-bottom: 1rem; /* Ajusta este valor según sea necesario para ajustar la posición */
+ margin-right: 2rem; /* Ajusta este valor según sea necesario para ajustar la posición */
+}
+
+.bordered-text-card {
+  -webkit-text-stroke: 0.5px rgb(7, 7, 7); /* ancho y color del borde */
+  color: white; /* Hace el texto transparente para que solo se muestre el borde */
+}
+

@@ -1,0 +1,4 @@
+.bordered-text {
+  -webkit-text-stroke: 1px rgb(7, 7, 7); /* ancho y color del borde */
+  color: white; /* Hace el texto transparente para que solo se muestre el borde */
+}

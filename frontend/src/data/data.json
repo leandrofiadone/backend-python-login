@@ -1,0 +1,103 @@
+{
+  "courses": [
+    {
+      "name": "FaceFussion",
+      "description": "Fusion de rostros, sin límite de pruebas. Desarrollado por SuperLab - By Super",
+      "tags": ["Imagenes", "Video"],
+      "link": "https://facefusion.superlab.ai/",
+      "image": "facefussion.png"
+    },
+    {
+      "name": "Stable Diffusion",
+      "description": "IA generativa de imágenes sin límites de pruebas. Desarrollado por SuperLab - By Super.",
+      "tags": ["Imagenes"],
+      "link": "https://stablediffusion.superlab.ai/",
+      "image": "stablediffusion.png"
+    },
+    {
+      
+      "name": "Extrapolate",
+      "description": "Video envejeciendo",
+      "tags": ["Video"],
+      "link": "https://extrapolate.app/",
+      "image": "extrapolate.png"
+    },
+    {
+      "name": "CivitAI",
+      "description": "Banco de modelos",
+      "tags": ["Imagenes", "Video"],
+      "link": "https://civitai.com/",
+      "image": "civitai.png"
+    },
+    {
+      "name": "Magic Eraser",
+      "description": "Borrar cosas",
+      "tags": ["Imagenes"],
+      "link": "https://magicstudio.com/es/magiceraser/",
+      "image": "magic-eraser.png"
+    },
+    {
+      "name": "PromptBase",
+      "description": "Encontrar prompts",
+      "tags": ["Prompt"],
+      "link": "https://promptbase.com/",
+      "image": "PromptBase.png"
+    },
+    {
+      "name": "DetectGPT",
+      "description": "DetectarGPT",
+      "tags": ["Texto"],
+      "link": "https://chrome.google.com/webstore/detail/detectgpt-detect-chat-gpt/oadkgbgppkhoaaoepjbcnjejmkknaobg/related",
+      "image": "DetectGPT.png"
+    },
+    {
+      "name": "Gemini",
+      "description": "LLM",
+      "tags": ["Texto"],
+      "link": "https://gemini.google.com/app",
+      "image": "Gemini.png"
+    },
+    {
+      "name": "Optimo IA",
+      "description": "Ideas",
+      "tags": ["Text"],
+      "link": "https://askoptimo.com/",
+      "image": "Optimo.png"
+    },
+    {
+      "name": "Viral Post",
+      "description": "Para LinkedIn",
+      "tags": ["Text"],
+      "link": "https://viralpostgenerator.taplio.com/?target=998942e43ce445e7a8ed43cc51862f42&params=%7B%7D",
+      "image": "ViralPost.png"
+    },
+    {
+      "name": "Locofy",
+      "description": "Traducir código web",
+      "tags": ["Código"],
+      "link": "https://www.locofy.ai/",
+      "image": "Locofy.png"
+    },
+    {
+      "name": "RestorePhotos",
+      "description": "Mejora calidad",
+      "tags": ["Imagenes"],
+      "link": "https://www.restorephotos.io/",
+      "image": "RestorePhotos.png"
+    },
+    {
+      "name": "Vizcom",
+      "description": "Paint to image",
+      "tags": ["Imagenes"],
+      "link": "https://www.vizcom.ai/",
+      "image": "Vizcom.png"
+    },
+    {
+      "name": "DreamInterpreter",
+      "description": "Interpretador de sueños",
+      "tags": ["Juegos"],
+      "link": "https://dreaminterpreter.ai/",
+      "image": "DreamInterpreter.png"
+    }
+  ]
+}

@@ -1,0 +1,26 @@
+[
+  {
+    "title": "FaceFusion",
+    "description": "Creación de Avatares y Mezcla de Rostros",
+    "videoUrl": "https://www.youtube.com/embed/xqb58A-Dkn4",
+    "powerpointUrl": "https://docs.google.com/presentation/d/1SvhdLOu1i3HD8nJWN2QnazeSkSq86uDk/edit?usp=drive_link&ouid=116828431625581181466&rtpof=true&sd=true"
+  },
+  {
+    "title": "Generación de Avatares",
+    "description": "Creación, Tecnologías y Aplicaciones",
+    "videoUrl": "https://www.youtube.com/embed/mTKKFlolMug",
+    "powerpointUrl": ""
+  },
+  {
+    "title": "Generacion Audio y Video",
+    "description": "Creación y Aplicaciones",
+    "videoUrl": "https://www.youtube.com/embed/cvORktsDDDo",
+    "powerpointUrl": "https://docs.google.com/presentation/d/15MBEj9t8AUDhkW9C01wtgIhVtIbZgxm3/edit?usp=drive_link&ouid=116828431625581181466&rtpof=true&sd=true"
+  },
+  {
+    "title": "Prompts Efectivos en IA",
+    "description": "Mejores Prácticas para Crear Prompts Efectivos",
+    "videoUrl": "https://www.youtube.com/embed/c6IBJ1c96e4",
+    "powerpointUrl": "https://docs.google.com/presentation/d/1ePDyBy5Vmxqymmfsq-DAfGcEsSYqrKtx/edit?usp=drive_link&ouid=116828431625581181466&rtpof=true&sd=true"
+  }
+]
