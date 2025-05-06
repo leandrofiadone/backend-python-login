@@ -43,10 +43,13 @@ const Login = () => {
     // Aquí se hace la llamada al servidor para autenticar al usuario
     try {
       // Reemplaza esta URL por la real en tu backend
-      const response = await axios.post("http://localhost:8000/auth/login", {
-        username,
-        password
-      })
+      const response = await axios.post(
+        `${import.meta.env.VITE_API_URL}/auth/login`,
+        {
+          username,
+          password
+        }
+      )
 
       // Si el login es exitoso, se guarda el token recibido del backend
       localStorage.setItem("token", response.data.token)
