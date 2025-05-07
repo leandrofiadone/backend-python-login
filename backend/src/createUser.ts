@@ -4,57 +4,93 @@ dotenv.config()
 import mongoose, {Document, Schema} from "mongoose"
 import bcrypt from "bcryptjs"
 
-// Definimos una interfaz para el Usuario (esto es un tipo TypeScript)
-interface IUser extends Document {
+export interface IUser extends Document {
   username: string
+  email: string
   password: string
+  resetPasswordToken?: string
+  resetPasswordExpires?: Date
+  comparePassword(candidatePassword: string): Promise<boolean>
 }
 
-// Creamos el esquema de usuario, asegurándonos de que los tipos sean correctos
-const userSchema: Schema<IUser> = new Schema(
+const UserSchema: Schema = new Schema(
   {
-    username: {type: String, required: true, unique: true},
-    password: {type: String, required: true}
+    username: {
+      type: String,
+      required: [true, "Please provide a username"],
+      unique: true,
+      trim: true,
+      minlength: [3, "Username must be at least 3 characters long"]
+    },
+    email: {
+      type: String,
+      required: [true, "Please provide an email"],
+      unique: true,
+      trim: true,
+      lowercase: true,
+      match: [
+        /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/,
+        "Please provide a valid email"
+      ]
+    },
+    password: {
+      type: String,
+      required: [true, "Please provide a password"],
+      minlength: [6, "Password must be at least 6 characters long"],
+      select: false
+    },
+    resetPasswordToken: {
+      type: String,
+      select: false
+    },
+    resetPasswordExpires: {
+      type: Date,
+      select: false
+    }
   },
-  {timestamps: true}
+  {
+    timestamps: true
+  }
 )
 
-// Aplicamos el hash a la contraseña antes de guardar al usuario
-userSchema.pre("save", async function (next) {
-  const user = this as IUser // Esto es para decirle a TypeScript que 'this' es de tipo IUser
-  if (!user.isModified("password")) return next()
+UserSchema.pre<IUser>("save", async function (next) {
+  if (!this.isModified("password")) return next()
 
   try {
     const salt = await bcrypt.genSalt(10)
-    user.password = await bcrypt.hash(user.password, salt)
+    this.password = await bcrypt.hash(this.password, salt)
     next()
   } catch (err) {
     next(err as mongoose.CallbackError)
   }
 })
 
-// Creamos el modelo de usuario con el esquema
-const User = mongoose.model<IUser>("User", userSchema)
+UserSchema.methods.comparePassword = async function (
+  candidatePassword: string
+): Promise<boolean> {
+  return bcrypt.compare(candidatePassword, this.password)
+}
 
-// Función para crear un usuario
-async function createUser(username: string, password: string): Promise<void> {
+const User = mongoose.model<IUser>("User", UserSchema)
+export default User
+
+// Función de ejemplo para crear un usuario
+async function createUser(
+  username: string,
+  email: string,
+  password: string
+): Promise<void> {
   try {
-    // Nos conectamos a la base de datos
-    await mongoose.connect(process.env.MONGODB_URI || "", {
-      // Removed deprecated options as they are now defaults in Mongoose
-    })
-
-    // Creamos el usuario
-    const newUser = new User({username, password})
+    await mongoose.connect(process.env.MONGODB_URI || "")
+    const newUser = new User({username, email, password})
     await newUser.save()
-
     console.log("Usuario creado exitosamente!")
   } catch (err) {
     console.error("Error al crear el usuario:", err)
   } finally {
-    mongoose.connection.close()
+    await mongoose.connection.close()
   }
 }
 
-// Llamamos a la función para crear el usuario
-createUser("leandro", "fiadone")
+// Llamada de ejemplo
+createUser("leandrito", "leandro@email.com", "fiadone123")

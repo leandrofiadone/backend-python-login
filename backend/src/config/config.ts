@@ -18,6 +18,17 @@ interface Config {
   cors: {
     origin: string
   }
+  email?: {
+    host: string
+    port: number
+    secure: boolean
+    user: string
+    password: string
+    from: string
+  }
+  app?: {
+    frontendUrl: string
+  }
 }
 
 const config: Config = {
@@ -34,6 +45,17 @@ const config: Config = {
   },
   cors: {
     origin: process.env.CORS_ORIGIN || "*"
+  },
+  email: {
+    host: process.env.EMAIL_HOST || "smtp.example.com",
+    port: parseInt(process.env.EMAIL_PORT || "587"),
+    secure: process.env.EMAIL_SECURE === "true",
+    user: process.env.EMAIL_USER || "user@example.com",
+    password: process.env.EMAIL_PASSWORD || "password",
+    from: process.env.EMAIL_FROM || '"SuperLab" <noreply@superlab.com>'
+  },
+  app: {
+    frontendUrl: process.env.FRONTEND_URL || "http://localhost:5173"
   }
 }
 
