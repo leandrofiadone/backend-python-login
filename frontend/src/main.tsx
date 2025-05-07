@@ -9,11 +9,10 @@ import CreateAccount from "./view/Create-Account.tsx"
 import Navbar from "./components/Navbar.tsx"
 import ProtectedRoute from "./components/ProtectedRoutes.tsx"
 import Login from "./view/Login.tsx"
-import Footer from './components/Footer.tsx'
+import Footer from "./components/Footer.tsx"
+import ResetPassword from "./components/ResetPassword.tsx" // Cambié la importación para coincidir con la ruta correcta
 
 // eslint-disable-next-line react-refresh/only-export-components
-
-
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
     <Router>
@@ -23,8 +22,13 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
 
       <Routes>
         <Route path="/login" element={<Login />} />
-        <Route path="/forgot-password" element={<ForgotPassword />} /> 
-        <Route path="/create-account" element={<CreateAccount />} /> 
+        <Route path="/forgot-password" element={<ForgotPassword />} />
+        <Route path="/create-account" element={<CreateAccount />} />
+        <Route
+          path="/reset-password/:resetToken"
+          element={<ResetPassword />}
+        />{" "}
+        {/* Nueva ruta */}
         <Route
           path="/"
           element={<ProtectedRoute path="/" element={<App />} />}
