@@ -51,12 +51,12 @@ export default function Navbar() {
             onClick={handleLogoClick}>
             <div className="flex-shrink-0 flex items-center">
               <img
-                className="block lg:hidden h-8 w-auto"
+                className="block lg:hidden h-20 w-auto"
                 src="/superlablogo.png"
                 alt="Superlab"
               />
               <img
-                className="hidden lg:block h-16 w-auto"
+                className="hidden lg:block h-48 w-auto"
                 src="/superlablogo.png"
                 alt="Superlab"
               />
