@@ -110,7 +110,7 @@ console.log("resetToken:", resetToken)
           <button
             type="button"
             onClick={() => navigate("/login")}
-            className="w-full border border-white text-white py-2 rounded-md hover:bg-white hover:bg-opacity-10 focus:outline-none mt-2">
+            className="w-full bg-red-700 border text-white py-2 rounded-md hover:bg-white hover:bg-opacity-10 focus:outline-none mt-2">
             Volver a inicio de sesión
           </button>
         </form>

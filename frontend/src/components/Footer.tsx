@@ -2,7 +2,7 @@ const Footer = () => {
   return (
     <footer className="bg-transparent  text-center py-4">
       <p className="text-xs">
-        <a
+        {/* <a
           href="https://www.superlab.ai/"
           target="_blank"
           rel="noopener noreferrer">
@@ -11,7 +11,7 @@ const Footer = () => {
             src="/superlogocropped.png"
             alt="SuperLab Logo"
           />
-        </a>
+        </a> */}
       </p>
     </footer>
   )

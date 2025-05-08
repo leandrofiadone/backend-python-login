@@ -1,12 +1,19 @@
-import React, {useState} from "react"
-import {Link, useNavigate} from "react-router-dom"
+import React, {useState, useEffect} from "react"
+import {Link, useNavigate, useLocation} from "react-router-dom"
 import Swal from "sweetalert2"
 
 export default function Navbar() {
-  const [currentPath, setCurrentPath] = useState(window.location.pathname)
+  const location = useLocation()
+  const [currentPath, setCurrentPath] = useState(location.pathname)
   const navigate = useNavigate()
+  const [isLoggedIn, setIsLoggedIn] = useState(!!localStorage.getItem("token"))
 
-  const handleNavLinkClick = (path: React.SetStateAction<string>) => {
+  useEffect(() => {
+    setCurrentPath(location.pathname)
+    setIsLoggedIn(!!localStorage.getItem("token"))
+  }, [location.pathname])
+
+  const handleNavLinkClick = (path: string) => {
     setCurrentPath(path)
   }
 
@@ -22,6 +29,7 @@ export default function Navbar() {
     }).then((result) => {
       if (result.isConfirmed) {
         localStorage.removeItem("token")
+        setIsLoggedIn(false)
         navigate("/login")
       }
     })
@@ -32,84 +40,77 @@ export default function Navbar() {
   }
 
   return (
-    <nav className=" bg-transparent max-w-full mt-8">
-      <div className="max-w-7xl mx-auto px-2 sm:px-6 lg:px-8">
-        <div className="relative flex items-center justify-between sm:h-16 h-14">
-          {/* Logo */}
+    <nav className="bg-transparent w-full mt-8">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="relative flex items-center justify-between h-14 sm:h-16">
+          {/* Logo - Centered when not logged in on mobile */}
           <div
-            className="flex-1 flex items-center sm:items-stretch sm:justify-start cursor-pointer transform hover:scale-105 transition duration-300 ease-in-out"
+            className={`flex items-center ${
+              !isLoggedIn && "mx-auto sm:mx-0"
+            } cursor-pointer transform hover:scale-105 transition duration-300 ease-in-out`}
             onClick={handleLogoClick}>
             <div className="flex-shrink-0 flex items-center">
               <img
-                className="block lg:hidden h-5 w-auto"
-                src="/superlablogo"
-                alt="Workflow"
+                className="block lg:hidden h-8 w-auto"
+                src="/superlablogo.png"
+                alt="Superlab"
               />
               <img
-                className="hidden lg:block h-24 w-auto"
+                className="hidden lg:block h-16 w-auto"
                 src="/superlablogo.png"
-                alt="Workflow"
+                alt="Superlab"
               />
             </div>
           </div>
 
-          {/* Navigation Links */}
-          {location.pathname !== "/login" && (
-            <div className="flex-1 flex items-center justify-center sm:items-stretch sm:justify-end">
-              <div className="hidden sm:block sm:ml-6">
-                <div className="flex space-x-4">
-                  <div className="mr-32">
-                    {/* Home Link */}
-                    <Link
-                      to="/"
-                      className={`${
-                        currentPath === "/"
-                          ? "text-white underline decoration-2 underline-offset-8 decoration-red-800"
-                          : "text-white"
-                      } px-3 py-2 rounded-md text-base font-medium mr-10`}
-                      aria-current={currentPath === "/" ? "page" : undefined}
-                      onClick={() => handleNavLinkClick("/")}>
-                      Cursos
-                    </Link>
+          {/* Navigation Links - Desktop */}
+          {isLoggedIn && (
+            <div className="hidden sm:flex items-center ml-auto">
+              <div className="flex space-x-6 mr-6">
+                {/* Home Link */}
+                <Link
+                  to="/"
+                  className={`${
+                    currentPath === "/"
+                      ? "text-white underline decoration-2 underline-offset-8 decoration-red-800"
+                      : "text-white hover:text-gray-300"
+                  } px-3 py-2 text-base font-medium`}
+                  aria-current={currentPath === "/" ? "page" : undefined}
+                  onClick={() => handleNavLinkClick("/")}>
+                  Cursos
+                </Link>
 
-                    {/* Herramientas-IA Link */}
-                    <Link
-                      to="/herramientas-ia"
-                      className={`${
-                        currentPath === "/herramientas-ia"
-                          ? "text-white underline decoration-2 underline-offset-8 decoration-red-800"
-                          : "text-white"
-                      } px-3 py-2 rounded-md text-base font-medium`}
-                      aria-current={
-                        currentPath === "/herramientas-ia" ? "page" : undefined
-                      }
-                      onClick={() => handleNavLinkClick("/herramientas-ia")}>
-                      Herramientas-IA
-                    </Link>
-                  </div>
-
-                  {/* Logout Button */}
-                  <button
-                    className="text-gray-800 hover:bg-gray-700 hover:text-white px-3 py-1 rounded-md text-sm font-medium"
-                    onClick={handleLogout}>
-                    Logout
-                  </button>
-                </div>
+                {/* Herramientas-IA Link */}
+                <Link
+                  to="/herramientas-ia"
+                  className={`${
+                    currentPath === "/herramientas-ia"
+                      ? "text-white underline decoration-2 underline-offset-8 decoration-red-800"
+                      : "text-white hover:text-gray-300"
+                  } px-3 py-2 text-base font-medium`}
+                  aria-current={
+                    currentPath === "/herramientas-ia" ? "page" : undefined
+                  }
+                  onClick={() => handleNavLinkClick("/herramientas-ia")}>
+                  Herramientas-IA
+                </Link>
               </div>
+
+              {/* Logout Button */}
+              <button
+                className="text-gray-800 hover:bg-gray-700 hover:text-white px-4 py-2 rounded-md text-sm font-medium"
+                onClick={handleLogout}>
+                Logout
+              </button>
             </div>
           )}
-          {/* Profile dropdown (Commented out for now) */}
-          <div className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
-            {/* Profile Dropdown */}
-            {/* Commented out for now */}
-          </div>
         </div>
       </div>
 
-      {/* Mobile Menu */}
-      <div className="sm:hidden" id="mobile-menu">
-        {location.pathname !== "/login" && (
-          <div className="flex px-2 pt-2 pb-2 space-y-1">
+      {/* Mobile Menu - Only show when logged in */}
+      {isLoggedIn && (
+        <div className="sm:hidden px-2 pt-2 pb-3 border-t border-gray-700 mt-2">
+          <div className="grid grid-cols-3 gap-2">
             {/* Home Link */}
             <Link
               to="/"
@@ -117,7 +118,7 @@ export default function Navbar() {
                 currentPath === "/"
                   ? "bg-gray-900 text-white"
                   : "text-gray-300 hover:bg-gray-700 hover:text-white"
-              } block pt-2 w-[70%] py-0 rounded-xl sm:text-base text-xs  font-medium`}
+              } text-center py-2 px-3 rounded-md text-sm font-medium`}
               aria-current={currentPath === "/" ? "page" : undefined}
               onClick={() => handleNavLinkClick("/")}>
               Cursos
@@ -130,23 +131,23 @@ export default function Navbar() {
                 currentPath === "/herramientas-ia"
                   ? "bg-gray-900 text-white"
                   : "text-gray-300 hover:bg-gray-700 hover:text-white"
-              } block pt-2 w-full py-0 rounded-xl sm:text-base text-xs font-medium`}
+              } text-center py-2 px-3 rounded-md text-sm font-medium`}
               aria-current={
                 currentPath === "/herramientas-ia" ? "page" : undefined
               }
               onClick={() => handleNavLinkClick("/herramientas-ia")}>
-              Herramientas-IA
+              IA
             </Link>
 
             {/* Logout Button */}
             <button
-              className="text-gray-800 ml-4 hover:bg-gray-700 hover:text-white  block max-w-16 rounded-md sm:text-base text-xs  font-medium w-full "
+              className="text-gray-800 hover:bg-gray-700 hover:text-white py-2 px-3 rounded-md text-sm font-medium"
               onClick={handleLogout}>
               Logout
             </button>
           </div>
-        )}
-      </div>
+        </div>
+      )}
     </nav>
   )
 }
